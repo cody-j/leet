@@ -31,6 +31,12 @@ class LinkedHashMap:
             return self.hash_map[key].val
         else:
             return -1
+    def pop(self):
+        n = self.head.next
+        if n.next is None:
+            return
+        self.head.next, n.next.prev = n.next, self.head
+        self.hash_map.pop(n.key)
 
     def _append(self, node):
         node.next, node.prev = self.tail, self.tail.prev
@@ -52,12 +58,14 @@ class LinkedHashMap:
         return len(self.hash_map)
 
 class LRU:
-    def __init__(self, capacity=10):
+    def __init__(self, capacity=2):
         self.capacity = capacity
         self.items = LinkedHashMap()
 
     def put(self, key, val):
         self.items.add_to_tail(key, val)
+        while len(self.items) > self.capacity:
+            self.items.pop()
 
     def get(self, key):
         return self.items.get(key)
@@ -74,5 +82,7 @@ if __name__=="__main__":
     cache.put('bar', '2')
     cache.items.print_follow()
     cache.put('baz', '3')
+    cache.put('boon', '3')
+    cache.put('boggle', '3')
     cache.items.print_follow()
     print(cache.get('asdf'))
