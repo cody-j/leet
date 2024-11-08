@@ -18,6 +18,7 @@ class LinkedHashMap:
         if key in self.hash_map:
             # cache hit
             n = self.hash_map[key]
+            n.val = val
             self._remove(n)
             self._append(n)
         else:
@@ -79,10 +80,13 @@ class LRU:
 if __name__=="__main__":
     cache = LRU()
     cache.put('foo', '1')
-    cache.put('bar', '2')
+    cache.put('foo', '2')
+    cache.put('foo', '3')
+    # cache.put('bar', '2')
+    # cache.put('baz', '3')
+    # cache.put('boon', '3')
+    # cache.put('boggle', '3')
+    # cache.put('foo', '3')
     cache.items.print_follow()
-    cache.put('baz', '3')
-    cache.put('boon', '3')
-    cache.put('boggle', '3')
-    cache.items.print_follow()
+    print(cache.get('foo'))
     print(cache.get('asdf'))
