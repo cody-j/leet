@@ -32,7 +32,7 @@ class LinkedHashMap:
             return self.hash_map[key].val
         else:
             return -1
-    def pop(self):
+    def pop_from_head(self):
         n = self.head.next
         if n.next is None:
             return
@@ -66,7 +66,7 @@ class LRU:
     def put(self, key, val):
         self.items.add_to_tail(key, val)
         while len(self.items) > self.capacity:
-            self.items.pop()
+            self.items.pop_from_head()
 
     def get(self, key):
         return self.items.get(key)
