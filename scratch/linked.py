@@ -1,50 +1,28 @@
 class Node:
-    def __init__(self, val=0, next=None):
+    def __init__(self, val=None, next=None):
         self.val = val
-        self.next = None
-
+        self.next = next
 
 class LinkedList:
     def __init__(self):
-        self.head = Node(None)
+        self.head = Node()
 
-    def append(self, val):
-        nn = Node(val)
+    def append(self, node):
         n = self.head
         while n.next:
             n = n.next
 
-        n.next = nn
-
-    def prepend(self, key, val):
-        nn = Node(key, val)
-        nn.next = self.head.next
-        self.head.next = nn
+        n.next = node
 
     def print_follow(self):
         n = self.head.next
-        while n:
+        while n and n.next:
             print(n.val)
-            print('-->')
             n = n.next
-
-
-def reverse(n):
-    if not n or not n.next:
-        return n
-    else:
-        q = reverse(n.next)
-        n.next.next = n
-        n.next = None
-        return q
-
 
 if __name__=="__main__":
     l = LinkedList()
-    l.append(1)
-    l.append(2)
-    l.append(3)
-
-    l.head.next = reverse(l.head.next)
+    l.append(Node(1))
+    l.append(Node(2))
+    l.append(Node(3))
     l.print_follow()
-
