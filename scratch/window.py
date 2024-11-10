@@ -10,6 +10,16 @@ def window_sum(arr=[], k=1):
         max_sum = max(max_sum, wind_sum)
     return max_sum
 
+
+def sliding(arr):
+    start = 0
+    current = {}
+    result = 0
+    for end in range(len(arr)):
+        current[arr[end]] = current.get(arr[end], 0) + 1
+
+
+
 if __name__=="__main__":
     print(arr)
     print(window_sum(arr, 2))
