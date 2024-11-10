@@ -1,8 +1,15 @@
 from random import randint
-arr = [randint for x in range(10)]
+arr = [randint(0, 4) for x in range(4)]
 
 def window_sum(arr=[], k=1):
-    pass
+    wind_sum = sum(arr[:k])
+    max_sum = wind_sum
+    # for "what's left of the array (len - window size, k)"
+    for i in range(len(arr) - k):
+        wind_sum = wind_sum - arr[i] + arr[k]
+        max_sum = max(max_sum, wind_sum)
+    return max_sum
 
 if __name__=="__main__":
-    window_sum(arr, 3)
+    print(arr)
+    print(window_sum(arr, 2))
