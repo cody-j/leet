@@ -15,9 +15,6 @@ Knapsack Problem (DP)
 
 """
 
-
-
-
 def genitems():
     # v, w
     items = [
@@ -29,8 +26,9 @@ def genitems():
     return items, capacity
 
 def solveknapsack(items, capacity):
+    # initialize array of best values at each weight
+    k = [0] * (capacity+1)
     pass
-
 
 if __name__=="__main__":
     items, capacity = genitems()
