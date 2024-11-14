@@ -24,17 +24,12 @@ def genitems():
     capacity = 5
     return items, capacity
 
+
 def solveknapsack(items, capacity):
-    k = [0] * (capacity+1)
-    c = [[]] * (capacity+1)
-    for i, (value, weight) in enumerate(items):
-        for w in range(capacity, weight-1, -1):
-            without_item=k[w]
-            with_item=(k[w-weight]+value)
-            if with_item > without_item:
-                k[w] = with_item
-                c[w] = c[w-weight] + [(value,weight)]
-    return k[capacity], c[capacity]
+    # sol'n table, 0s because looking for highest value
+    t=[0]*c
+
+    pass
 
 if __name__=="__main__":
     items, capacity = genitems()
