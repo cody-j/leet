@@ -26,10 +26,18 @@ def genitems():
 
 
 def solveknapsack(items, capacity):
-    # sol'n table, 0s because looking for highest value
-    t=[0]*c
+    t=[0]*(capacity+1) # highest value seen
+    p=[[]]*(capacity+1) # path items for highest value
 
-    pass
+    for value, weight in items:
+        for i in range(capacity, weight-1, -1):
+            value_with = t[i-weight]+value
+            value_without = t[i]
+            if value_with > value_without:
+                t[i] = value_with
+                p[i] = p[i-weight] + [(value, weight)]
+    return t[capacity], p[capacity]
+
 
 if __name__=="__main__":
     items, capacity = genitems()
