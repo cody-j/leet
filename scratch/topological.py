@@ -1,9 +1,19 @@
 from collections import deque, defaultdict
 
-def topological(graph):
-    deps = defaultdict(int)
+def topological(graph, start):
+    q = deque([start])
+    seen = set(q)
 
-    pass
+    results = []
+    while q:
+        n = q.popleft()
+        results.append(n)
+        for v in graph[n]:
+            if v not in seen:
+                q.append(v)
+                seen.add(v)
+
+    return results
 
 if __name__=="__main__":
     graph = {
@@ -15,4 +25,5 @@ if __name__=="__main__":
         'F': ['G'],
         'G': []
     }
-    topological(graph)
+
+    print(topological(graph, 'A'))
