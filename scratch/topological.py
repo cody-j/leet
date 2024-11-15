@@ -1,19 +1,33 @@
 from collections import deque, defaultdict
 
-def topological(graph, start):
-    q = deque([start])
-    seen = set(q)
+def topological(graph):
+    """
+    The main difference between topological sort and bfs in in queueing choice, and state tracking,
+    particularly adding not all neighbours, but only those with a zero in_degree (after current
+    node processed and decrements its neighbours).
+    """
+    in_degree = defaultdict(int)
+    for node in graph:
+        for neighbour in graph[node]:
+            in_degree[neighbour] += 1
+    print(f'in degree: {in_degree}')
+    q = deque([node for node in graph if in_degree[node] == 0])
+
+
 
     results = []
     while q:
         n = q.popleft()
         results.append(n)
-        for v in graph[n]:
-            if v not in seen:
-                q.append(v)
-                seen.add(v)
+        for neighbour in graph[n]:
+            in_degree[neighbour] -= 1
+            if in_degree[neighbour] == 0:
+                q.append(neighbour)
 
+    if len(results) != len(graph):
+        return None # cycle detected
     return results
+
 
 if __name__=="__main__":
     graph = {
@@ -26,4 +40,4 @@ if __name__=="__main__":
         'G': []
     }
 
-    print(topological(graph, 'A'))
+    print(topological(graph))
