@@ -1,3 +1,15 @@
+def edit_distance(word1, word2):
+    m, n = len(word1), len(word2)
+    k = [[0]*(n+1) for _ in range(m+1)]
+
+    for i, l in enumerate(word2):
+        k[0][i] = i
+    for i, l in enumerate(word1):
+        k[i][0] = i
+
+    for row in k:
+        print(row)
+
 def min_path_sum(grid):
     # define dimensions m rows, n columns
     m, n = len(grid), len(grid[0])
@@ -31,4 +43,5 @@ if __name__=="__main__":
         [1, 5, 1],
         [4, 2, 1],
     ]
-    print(min_path_sum(grid))
+    # print(min_path_sum(grid))
+    print(edit_distance('horse', 'rose'))
