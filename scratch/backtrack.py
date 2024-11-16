@@ -1,3 +1,4 @@
+import copy
 def nqueens(n):
     """
         if not valid(state):
@@ -11,11 +12,7 @@ def nqueens(n):
 
     """
     board = [[0]*n for _ in range(n)]
-
-
-    def valid(cell):
-        return cell == '.'
-
+    queens = 0
     def mark_attacks(row, col, available=False):
 
         for i in range(row+1, len(board)):
@@ -28,13 +25,14 @@ def nqueens(n):
 
     def is_solution(board):
         return True
-
+    results = []
     def backtrack(board, row):
+        nonlocal queens
         if row >= len(board):
-            if is_solution(board):
-                for row in board:
-                    print(['Q' if v == 'Q' else '.' for v in row])
-                print('')
+            print('n: ', n)
+            if queens == n:
+                print('solution found!')
+                results.append([[ 'Q' if board[row][col] == 'Q' else '.' for col in range(len(board[row])) ] for row in range(len(board))])
             return
 
         for col in range(len(board[row])):
@@ -42,17 +40,26 @@ def nqueens(n):
                 continue
 
             board[row][col] = 'Q'
+            queens += 1
             mark_attacks(row, col)
             backtrack(board, row+1)
             mark_attacks(row, col, available=True)
             board[row][col] = 0
+            queens -= 1
         return board
 
 
 
-    board = backtrack(board, 0)
-    return board
+    backtrack(board, 0)
+    return len(results), results
 
 
 if __name__=="__main__":
-    board = nqueens(5)
+    n = 5
+    queens, boards = nqueens(n)
+    print(f'n queens for {n}={queens}')
+    for i in range(len(boards)):
+        print(f'Solution {i+1}:')
+        for row in boards[i]:
+            print(row)
+
