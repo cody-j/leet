@@ -53,13 +53,44 @@ def nqueens(n):
     backtrack(board, 0)
     return len(results), results
 
+def gen_parens(n):
+    valid_parens = []
+
+    def backtrack(s='', l=0, r=0):
+        nonlocal valid_parens
+
+        if l == r and r == n:
+            valid_parens.append(s)
+            return
+
+        if l < n:
+            backtrack(s+'(', l+1, r)
+        if r < l:
+            backtrack(s+')', l, r+1)
+
+    backtrack(s='(', l=1)
+
+    return valid_parens
+
+def perms(s):
+    valid_perms = []
+
+
+    return valid_perms
 
 if __name__=="__main__":
-    n = 5
-    queens, boards = nqueens(n)
-    print(f'n queens for {n}={queens}')
-    for i in range(len(boards)):
-        print(f'Solution {i+1}:')
-        for row in boards[i]:
-            print(row)
+
+
+    n = 4
+
+    results = gen_parens(4)
+    for s in results:
+        print(s)
+
+    # queens, boards = nqueens(n)
+    # print(f'n queens for {n}={queens}')
+    # for i in range(len(boards)):
+    #     print(f'Solution {i+1}:')
+    #     for row in boards[i]:
+    #         print(row)
 
