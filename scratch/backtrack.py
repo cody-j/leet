@@ -78,15 +78,18 @@ def perms(word):
         return 1
 
     valid_perms = []
-    q = deque([(word[0], word[1:])])
+    q = deque([('', word)])
 
     while q:
         perm, rest = q.popleft()
         if len(rest) == 0:
-            print('empty')
             valid_perms.append(perm)
+            continue
 
-        print(perm, rest)
+        for i, l in enumerate(rest):
+            q.append((perm+l,rest[:i]+rest[i+1:]))
+
+
 
     return valid_perms
 
