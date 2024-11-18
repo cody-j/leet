@@ -77,8 +77,6 @@ def perms(word):
     if len(word) == 1:
         return 1
 
-    if len(word) == 2:
-        return 2
     valid_parens = []
     q = deque([(word[0], word[1:])])
 
