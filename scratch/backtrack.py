@@ -1,3 +1,4 @@
+from collections import deque
 import copy
 def nqueens(n):
     """
@@ -72,18 +73,22 @@ def gen_parens(n):
 
     return valid_parens
 
-def perms(s):
-    valid_perms = []
+def perms(word):
 
 
-    return valid_perms
+    q = deque([(word[0], word[1:])])
+
+    while q:
+        perm, rest = q.popleft()
+        print(perm, rest)
+
 
 if __name__=="__main__":
 
 
     n = 4
 
-    results = gen_parens(4)
+    results = perms('123')
     for s in results:
         print(s)
 
