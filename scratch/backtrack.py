@@ -77,16 +77,18 @@ def perms(word):
     if len(word) == 1:
         return 1
 
-    valid_parens = []
+    valid_perms = []
     q = deque([(word[0], word[1:])])
 
     while q:
         perm, rest = q.popleft()
-
+        if len(rest) == 0:
+            print('empty')
+            valid_perms.append(perm)
 
         print(perm, rest)
 
-    return valid_parens
+    return valid_perms
 
 if __name__=="__main__":
 
