@@ -93,6 +93,14 @@ def perms(word):
 
     return valid_perms
 
+def perms_recurse(word):
+    valid_perms = []
+    def backtrack(perm='', rest=''):
+        pass
+
+    return valid_perms
+
+
 if __name__=="__main__":
 
 
