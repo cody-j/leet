@@ -131,6 +131,25 @@ def rotate(arr, k):
     reverse(0, a-1)
     reverse(a, n-1)
 
+def candy(ratings):
+    """
+    Minimum candy to distribute amongst children, who are rated. Higher rated
+    kids must have more candy than those beside them. Kids need at least
+    1 candy each.
+    """
+    candy = [1]*len(ratings)
+    for i in range(1, len(candy)):
+        # if decreasing from previous, do nothing, keep 1
+        # if increasing from previous, current = previous candy + 1
+        if ratings[i] < ratings[i-1]:
+            if candy[i] == candy[i-1]:
+                candy[i-1] = candy[i]+1
+        if ratings[i] > ratings[i-1]:
+            candy[i] = candy[i-1]+1
+    for i in range(len(candy)-2, -1, -1):
+        if ratings[i] > ratings[i+1] and candy[i] <= candy[i+1]:
+            candy[i] = candy[i+1]+1
+    return sum(candy)
 
 if __name__=="__main__":
     # justified = justify(["This", "is", "an", "example", "of", "text", "justification."])
