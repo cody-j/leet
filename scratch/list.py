@@ -65,8 +65,42 @@ def trap(heights):
     return v
 
 
+def enoughGasForCircuit(gas, cost):
+    """
+    because of forward-backward guarantee, if we have more or as much gas as
+    cost, there exists a solution.
+    """
+
+    # early return if not enough gas
+    if sum(gas) < sum(cost):
+        return -1
+
+    # tank has no gas, starting as first gas station
+    t = 0
+    s = 0
+
+    for i in range(len(gas)):
+        t += gas[i] - cost[i]
+
+        if t < 0:
+            s = i+1
+            t=0
+
+    return s
 
 
+def jump(nums):
+    sol = [float('inf')]*len(nums)
+    sol[-1] = 0
+    min_jumps = float('inf')
+    closest = len(nums)-1
+    for i in range(len(nums)-2, -1, -1):
+        if nums[i] > 0:
+            k = sol[i+1:min(len(nums)+1, i+nums[i]+1)]
+            closest = min(k)
+            sol[i] = closest+1
+
+    return sol[0]
 
 
 if __name__=="__main__":
