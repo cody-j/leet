@@ -90,6 +90,12 @@ def enoughGasForCircuit(gas, cost):
 
 
 def jump(nums):
+    """
+    the insight here is that we want to work backwards through the options and
+    select the minimum from the list of options. It is somewhat inefficient as
+    we concatenate the jump range.
+    """
+
     sol = [float('inf')]*len(nums)
     sol[-1] = 0
     min_jumps = float('inf')
