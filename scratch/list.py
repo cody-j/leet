@@ -94,6 +94,8 @@ def jump(nums):
     the insight here is that we want to work backwards through the options and
     select the minimum from the list of options. It is somewhat inefficient as
     we concatenate the jump range.
+    Like the knapsack problem we work backwards from the "full" configuration;
+    top of the stair, desired state.
     """
 
     sol = [float('inf')]*len(nums)
@@ -109,10 +111,33 @@ def jump(nums):
     return sol[0]
 
 
+def rotate(arr, k):
+    """
+    Easiest to just do three reversals
+    """
+    n = len(arr)
+    if n == 1:
+        return
+    if k == 0 or k == len(arr):
+        return
+    def reverse(l, r):
+        while l < r:
+            arr[l], arr[r] = arr[r], arr[l]
+            l+=1
+            r-=1
+
+    a = k if k < n else k % n
+    reverse(0, n-1)
+    reverse(0, a-1)
+    reverse(a, n-1)
+
+
 if __name__=="__main__":
     # justified = justify(["This", "is", "an", "example", "of", "text", "justification."])
     # for line in justified:
     #     print(line)
 
     trapped = trap([0,1,0,2,1,0,1,3,2,1,2,1])
-    print(trapped) # expected 6
+    arr = [1, 2, 3, 4, 5, 6]
+    rotate(arr, 2)
+    # print(trapped) # expected 6
