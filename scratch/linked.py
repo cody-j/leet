@@ -20,9 +20,43 @@ class LinkedList:
             print(n.val)
             n = n.next
 
+
+
+def reverseNodesInGroup(head, k):
+    n = head
+    s = []
+    l = 1
+
+    while n:
+        s.append(n)
+        n = n.next
+
+    print([x.val for x in s])
+    t = s[-1]
+
+    while s:
+        if len(s) % k == 0:
+            #reverse
+            print([x.val for x in s])
+
+        p = s.pop()
+        if len(s) > 0:
+            p.next = s[-1]
+        else:
+            p.next = None
+
+    return t
+
 if __name__=="__main__":
-    l = LinkedList()
-    l.append(Node(1))
-    l.append(Node(2))
-    l.append(Node(3))
-    l.print_follow()
+    head = Node(1)
+    head.next = Node(2)
+    head.next.next = Node(3)
+    head.next.next.next = Node(4)
+    head.next.next.next.next = Node(5)
+    headr = reverseNodesInGroup(head, 2)
+    print(headr.val)
+    h = headr
+    while h:
+        print(h.val)
+        h = h.next
+
