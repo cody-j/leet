@@ -78,8 +78,39 @@ def reverseNodesInGroup(head, k):
 
         print("remainder post: ", print_head(remainder))
 
-    print('')
     return remainder
+
+def rotate(head, k):
+    if not head or not head.next or k == 0:
+        return head
+
+    n = head
+    t = None
+    count = 0
+
+    while n:
+        count += 1
+        if n.next is None:
+            t = n
+        n = n.next
+    if k == count:
+        return head
+    r = k % count
+    if r == 0:
+        return head
+
+    # circular now
+    t.next = head
+
+    f = head
+
+    for i in range(count - r - 1):
+        f = f.next
+
+    h = f.next
+    f.next = None
+    return h
+
 
 if __name__=="__main__":
     head = Node(1)
