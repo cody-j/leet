@@ -15,7 +15,6 @@ def nqueens(n):
     board = [[0]*n for _ in range(n)]
     queens = 0
     def mark_attacks(row, col, available=False):
-
         for i in range(row+1, len(board)):
             board[i][col] = board[i][col] - 1 if available else board[i][col] + 1
             rows_ahead = i-row
@@ -24,8 +23,7 @@ def nqueens(n):
             if col+rows_ahead < len(board[row]):
                 board[i][col+rows_ahead] = board[i][col+rows_ahead] - 1 if available else board[i][col+rows_ahead] + 1
 
-    def is_solution(board):
-        return True
+
     results = []
     def backtrack(board, row):
         nonlocal queens
@@ -106,14 +104,14 @@ if __name__=="__main__":
 
     n = 4
 
-    results = perms('123')
-    for s in results:
-        print(s)
+    # results = perms('123')
+    # for s in results:
+    #     print(s)
 
-    # queens, boards = nqueens(n)
-    # print(f'n queens for {n}={queens}')
-    # for i in range(len(boards)):
-    #     print(f'Solution {i+1}:')
-    #     for row in boards[i]:
-    #         print(row)
+    queens, boards = nqueens(n)
+    print(f'n queens for {n}={queens}')
+    for i in range(len(boards)):
+        print(f'Solution {i+1}:')
+        for row in boards[i]:
+            print(row)
 
