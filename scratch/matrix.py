@@ -27,12 +27,36 @@ def islands(ocean):
 
     for i in range(len(ocean)):
         for j in range(len(ocean[0])):
-            if (i,j) in seen:
-                continue
-
             max_size = max(checkLocation(i, j), max_size)
-            print('max: ', max_size)
 
+    return max_size
+
+
+def wordsearch(letters, word):
+    directions = [(1,0),(1,1),(0,1),(-1, 0),(0,-1),(-1,-1),(-1,1),(1,-1)]
+
+    def search(i,j, dir, subword):
+        if len(subword) == 0:
+            return 1
+
+        try:
+            letter = letters[i][j]
+        except IndexError:
+            return 0
+
+        if letter != subword[0]:
+            return 0
+
+        return search(i+dir[0], j+dir[1], dir, subword[1:])
+
+    appearances = 0
+
+    for i in range(len(letters)):
+        for j in range(len(letters[0])):
+            for dir in directions:
+                appearances += search(i, j, dir, word)
+
+    return appearances
 
 if __name__=="__main__":
     ocean = [
@@ -43,5 +67,13 @@ if __name__=="__main__":
         [0, 1, 1, 0, 0],
     ]
 
+    letters = [
+        ['A', 'A', 'A', 'A', 'A'],
+        ['A', 'A', 'A', 'C', 'A'],
+        ['A', 'A', 'A', 'A', 'A'],
+        ['A', 'T', 'A', 'A', 'A'],
+        ['A', 'A', 'A', 'A', 'A'],
+    ]
 
-    islands(ocean)
+    # print(islands(ocean))
+    print(wordsearch(letters, 'CAT'))

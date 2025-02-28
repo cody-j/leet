@@ -75,7 +75,7 @@ def enoughGasForCircuit(gas, cost):
     if sum(gas) < sum(cost):
         return -1
 
-    # tank has no gas, starting as first gas station
+    # tank has no gas, starting at first gas station
     t = 0
     s = 0
 
@@ -151,12 +151,28 @@ def candy(ratings):
             candy[i] = candy[i+1]+1
     return sum(candy)
 
+
+def roman_numerals(num: int):
+    n = num
+    rn = [(1000, 'M'), (500, 'D'), (100, 'C'), (50, 'L'), (10, 'X'), (5, 'V'), (1, 'I')]
+    ancient = ''
+    for m, r in rn:
+        print(n)
+        while n > m:
+            n = n-m
+            ancient += r
+        print(n,'\n')
+    return ancient
+
+
+
 if __name__=="__main__":
     # justified = justify(["This", "is", "an", "example", "of", "text", "justification."])
     # for line in justified:
     #     print(line)
 
-    trapped = trap([0,1,0,2,1,0,1,3,2,1,2,1])
-    arr = [1, 2, 3, 4, 5, 6]
-    rotate(arr, 2)
+    # trapped = trap([0,1,0,2,1,0,1,3,2,1,2,1])
+    # arr = [1, 2, 3, 4, 5, 6]
+    # rotate(arr, 2)
     # print(trapped) # expected 6
+    print(roman_numerals(3749))
